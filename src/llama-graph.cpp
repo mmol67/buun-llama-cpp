@@ -2875,7 +2875,8 @@ ggml_tensor * llm_graph_context::build_rs_in(
         llm_graph_input_rs * inp,
         ggml_tensor * s,
             int32_t   state_size,
-            int32_t   n_seqs) const {
+            int32_t   n_seqs,
+            bool      decode_only) const {
     const auto * kv_state = inp->mctx;
 
     if (kv_state->states_are_contiguous_identity((uint32_t) n_seqs)) {

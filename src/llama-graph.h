@@ -1144,7 +1144,8 @@ struct llm_graph_context {
             llm_graph_input_rs * inp,
             ggml_tensor * s,
                 int32_t   state_size,
-                int32_t   n_seqs) const;
+                int32_t   n_seqs,
+                bool      decode_only = true) const;
 
     ggml_tensor * build_rwkv_token_shift_load(
         llm_graph_input_rs * inp,
