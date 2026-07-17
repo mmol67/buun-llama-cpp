@@ -2431,7 +2431,9 @@ bool llama_kv_cache::vbr_over_budget(uint32_t wm_cells) const {
         if (p.vmm == nullptr) {
             continue;
         }
-        if (vbr_vmm_projected_bytes(p, wm_cells) > vbr_budget_eff(p)) {
+        const size_t mapped_now = p.be->vmm_pool_mapped(p.vmm);
+        const size_t safe_cap = std::max(vbr_budget_eff(p), mapped_now);
+        if (vbr_vmm_projected_bytes(p, wm_cells) > safe_cap) {
             return true;
         }
     }
